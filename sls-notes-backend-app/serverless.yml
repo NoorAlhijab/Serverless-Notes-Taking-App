@@ -36,6 +36,7 @@ provider:
   endpointType: regional
   environment:
     NOTES_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    COGNITO_IDENTITY_POOL_ID: us-east-1:3d2e59fc-67fb-4bce-afda-916695c6f4c7
   iam:
     role:
       statements:
@@ -49,7 +50,19 @@ provider:
           Action:
             - dynamodb:Query
           Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.NOTES_TABLE}/index/note_id-index"
+
 functions:
+  authenticate-google:
+    handler: api/authenticate-google.handler
+    description: Google IDP Authentication
+    events:
+      - http:
+          path: auth
+          method: get
+          cors:
+            origin: "*"
+            headers: ${self:custom.allowedHeaders}
+
   add-note:
     handler: api/add-note.handler
     description: POST /note
@@ -57,8 +70,9 @@ functions:
       - http:
           path: note
           method: post
+          authorizer: aws_iam
           cors:
-            origin: '*'
+            origin: "*"
             headers: ${self:custom.allowedHeaders}
 
   update-note:
@@ -68,8 +82,9 @@ functions:
       - http:
           path: note
           method: patch
+          authorizer: aws_iam
           cors:
-            origin: '*'
+            origin: "*"
             headers: ${self:custom.allowedHeaders}
 
   get-notes:
@@ -79,8 +94,9 @@ functions:
       - http:
           path: notes
           method: get
+          authorizer: aws_iam
           cors:
-            origin: '*'
+            origin: "*"
             headers: ${self:custom.allowedHeaders}
 
   get-note:
@@ -90,8 +106,9 @@ functions:
       - http:
           path: note/n/{note_id}
           method: get
+          authorizer: aws_iam
           cors:
-            origin: '*'
+            origin: "*"
             headers: ${self:custom.allowedHeaders}
 
   delete-note:
@@ -101,8 +118,9 @@ functions:
       - http:
           path: note/t/{timestamp}
           method: delete
+          authorizer: aws_iam
           cors:
-            origin: '*'
+            origin: "*"
             headers: ${self:custom.allowedHeaders}
 
 resources:
@@ -137,3 +155,13 @@ resources:
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
+
+    GatewayResponseDefault4XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"

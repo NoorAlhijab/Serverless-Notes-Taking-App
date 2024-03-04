@@ -12,6 +12,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.437.0",
     "@aws-sdk/lib-dynamodb": "^3.437.0",
+    "jwt-decode": "^4.0.0",
     "moment": "^2.29.4",
     "serverless-offline": "^13.2.0",
     "underscore": "^1.13.6",

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Serverless Notes Taking App
 
 Welcome to the Serverless Notes Taking App project! This project demonstrates how to build an end-to-end serverless web application using API Gateway, Lambda, and DynamoDB, integrating a serverless backend REST API with a frontend single page application developed using Angular. The application will be deployed in a serverless fashion using Amazon S3 and CloudFront.
@@ -104,3 +105,6 @@ To deploy the end-to-end serverless web application:
 - [Lambda](https://aws.amazon.com/lambda/)
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [CloudFront](https://aws.amazon.com/cloudfront/)
+=======
+- Before running this project, kindly run "npm install" to install project dependencies
+>>>>>>> d4c2143e733d43f44b4cb1fc0818cf939af8da63
