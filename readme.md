@@ -1,13 +1,12 @@
-<<<<<<< HEAD
 # Serverless Notes Taking App
 
-Welcome to the Serverless Notes Taking App project! This project demonstrates how to build an end-to-end serverless web application using API Gateway, Lambda, and DynamoDB, integrating a serverless backend REST API with a frontend single page application developed using Angular. The application will be deployed in a serverless fashion using Amazon S3 and CloudFront.
+Welcome to the Serverless Notes Taking App project! This project demonstrates how to build an end-to-end serverless web application using API Gateway, Lambda, and DynamoDB, integrating a serverless backend REST API with a frontend single-page application developed using Angular. The application will be deployed in a serverless fashion using Amazon S3 and CloudFront.
 
 ## Overview
 
 The Serverless Notes Taking App allows users to:
 
-- Log in using their social media accounts (e.g., Google account).
+- Log in using their social media accounts, such as Google.
 - Add, view, modify, and delete notes within the application.
 - Store notes data in a DynamoDB table.
 - Use a RESTful API to interact with DynamoDB from the frontend application.
@@ -83,17 +82,10 @@ To use a custom domain name and Route 53 for your Serverless Notes Taking App:
 
 4. **Set Up SSL Certificate**: Use AWS Certificate Manager (ACM) to set up an SSL certificate for your custom domain, enabling HTTPS.
 
-5. **Update API Endpoint URLs**: Modify the API endpoint URLs in your frontend application's configuration file (`environment.prod.js`) to utilize the custom domain name.
 
+## Authentication and Authorization Setup
 
-## Deployment of End-to-End Serverless Web Application
-
-To deploy the end-to-end serverless web application:
-
-- Build the frontend application by running `npm run build` in the `serverless-frontend` directory.
-- Upload the built files to an S3 bucket automatically using CI/CD pipeline.
-- Create a CloudFront distribution to serve the frontend application from the S3 bucket.
-- Configure CloudFront to use the custom domain name for the distribution.
+Build authentication and authorization by adding Google Login for authentication and integrating Google Authentication with AWS Cognito to authorize users with appropriate IAM permissions. This allows users to sign in to the app using their Google account.
 
 ## Resources
 
@@ -105,6 +97,3 @@ To deploy the end-to-end serverless web application:
 - [Lambda](https://aws.amazon.com/lambda/)
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [CloudFront](https://aws.amazon.com/cloudfront/)
-=======
-- Before running this project, kindly run "npm install" to install project dependencies
->>>>>>> d4c2143e733d43f44b4cb1fc0818cf939af8da63
